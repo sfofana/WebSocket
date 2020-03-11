@@ -1,0 +1,5 @@
+package com.app.gadget.controller;
+
+public class hystrixController {
+
+}

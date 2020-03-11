@@ -1,0 +1,2 @@
+server.port=9000
+items-service.url=http://localhost:9002/items-service/**

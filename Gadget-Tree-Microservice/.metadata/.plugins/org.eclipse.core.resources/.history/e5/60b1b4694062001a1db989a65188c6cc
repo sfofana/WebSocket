@@ -1,0 +1,3 @@
+server.port=9001
+zuul.routes.items-service.url=http://localhost:9001
+zuul.routes.items-service.path=/items-service/**

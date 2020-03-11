@@ -1,0 +1,25 @@
+package com.app.gadget.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.app.gadget.data.ItemData;
+import com.app.gadget.model.Item;
+
+@Service
+public class ItemService {
+	
+	@Autowired
+	ItemData itemData;
+	
+	public List<Item> getAllItems() {
+		return itemData.findAll();
+	}
+	
+	public Item searchItem(int id) {
+		return itemData.findById(id).get();
+	}
+
+}

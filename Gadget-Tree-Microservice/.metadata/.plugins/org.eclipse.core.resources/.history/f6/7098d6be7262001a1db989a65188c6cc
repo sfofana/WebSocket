@@ -1,0 +1,6 @@
+package com.app.gadget.service;
+
+@Service
+public class ItemService {
+
+}
