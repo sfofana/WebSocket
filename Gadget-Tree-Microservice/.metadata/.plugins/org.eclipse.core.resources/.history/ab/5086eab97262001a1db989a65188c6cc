@@ -1,6 +1,0 @@
-package com.app.gadget.controller;
-
-@RestController
-public class ItemController {
-
-}

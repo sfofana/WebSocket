@@ -1,6 +1,0 @@
-package com.app.gadget.data;
-
-@repositoy
-public class ItemData  {
-
-}
