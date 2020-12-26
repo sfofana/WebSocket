@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { WebSocketAPI } from './configurations/webSocketAPI';
 import { ServerMessage } from './models/serverMessage';
-import { JsonUtil } from './utilities/jsonUtil';
+import { SocketService } from './services/socket.service';
+import { SubjectService } from './services/subject.service';
 
 @Component({
   selector: 'app-root',
@@ -10,29 +10,37 @@ import { JsonUtil } from './utilities/jsonUtil';
 })
 export class AppComponent {
 
-  webSocketAPI: WebSocketAPI;
+  clientMsgs: Array<string> = [];
   serverMessage: ServerMessage = {} as ServerMessage
+  serverMsgs: Array<ServerMessage> = [];
   greeting: any;
-  name: string;
+  msg: string;
+
+  constructor(private socket: SocketService, private memory: SubjectService) { }
 
   ngOnInit() {
-    this.webSocketAPI = new WebSocketAPI(new AppComponent());
+    this.memory.sync.subscribe(data => {
+      this.serverMessage = data;
+      this.serverMsgs.push(data);
+    });
   }
 
-  connect(){
-    this.webSocketAPI.connect();
+  connect() {
+    this.socket.connect();
   }
 
-  disconnect(){
-    this.webSocketAPI.disconnect();
+  disconnect() {
+    this.socket.disconnect();
   }
 
-  sendMessage(){
-    this.webSocketAPI.send(this.name);
+  sendMessage() {
+    this.clientMsgs.push(this.msg);
+    this.socket.send(this.msg);
+    this.reset();
   }
 
-  handleMessage(message){
-    this.serverMessage = JsonUtil.jsonToServerMessage(message);
-    console.log(`content === ${this.serverMessage.content}`)
+  reset() {
+    this.msg = "";
   }
+
 }
