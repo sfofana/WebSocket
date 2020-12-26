@@ -1,5 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
-import { ServerMessage } from '../models/serverMessage';
+import { ChatMessage } from '../models/chatMessage';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -7,12 +7,12 @@ import { Injectable } from '@angular/core';
 })
 export class SubjectService {
 
-  serverMessage: ServerMessage = {} as ServerMessage;
-  channel = new BehaviorSubject<ServerMessage>(this.serverMessage);
+  chatMessage: ChatMessage = {} as ChatMessage;
+  channel = new BehaviorSubject<ChatMessage>(this.chatMessage);
 
   constructor() { }
 
-  public setChannel(message: ServerMessage) {
+  public setChannel(message: ChatMessage) {
     this.channel.next(message);
   }
 

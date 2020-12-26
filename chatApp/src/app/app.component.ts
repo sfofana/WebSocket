@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChatMessage } from './models/chatMessage';
 import { ServerMessage } from './models/serverMessage';
 import { SocketService } from './services/socket.service';
 import { SubjectService } from './services/subject.service';
@@ -10,18 +11,17 @@ import { SubjectService } from './services/subject.service';
 })
 export class AppComponent {
 
-  clientMsgs: Array<string> = [];
-  serverMessage: ServerMessage = {} as ServerMessage
-  serverMsgs: Array<ServerMessage> = [];
-  greeting: any;
-  msg: string;
+  clientMsg: ChatMessage = {} as ChatMessage
+  serverMsg: ChatMessage = {} as ChatMessage;
+  msgs: Array<ChatMessage> = [];
 
   constructor(private socket: SocketService, private memory: SubjectService) { }
 
   ngOnInit() {
     this.memory.sync.subscribe(data => {
-      this.serverMessage = data;
-      this.serverMsgs.push(data);
+      this.serverMsg.composer = false;
+      this.serverMsg.message = data.message;
+      this.msgs.push(data);
     });
   }
 
@@ -34,13 +34,14 @@ export class AppComponent {
   }
 
   sendMessage() {
-    this.clientMsgs.push(this.msg);
-    this.socket.send(this.msg);
+    this.clientMsg.composer = true;
+    this.msgs.push(this.clientMsg);
+    this.socket.send(this.clientMsg.message);
     this.reset();
   }
 
   reset() {
-    this.msg = "";
+    this.clientMsg = {} as ChatMessage;
   }
 
 }
