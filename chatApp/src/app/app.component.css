@@ -1,0 +1,16 @@
+.message{
+  overflow: hidden;
+  position: fixed;
+  width: 97%;
+  max-width: 97%;
+}
+.content{
+  overflow: auto;
+  height: 89%;
+  max-height: 89%;
+  width: 97%;
+  max-width: 97%;
+  background-color: whitesmoke;
+  position: fixed;
+  width: 100%;
+}

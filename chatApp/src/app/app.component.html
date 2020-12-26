@@ -12,25 +12,31 @@
       </form>
     </div>
 
-    <div class="w3-row-padding w3-margin">
-      <div class="w3-content">
+    <div class="w3-container">
+      <div class="content w3-row">
         <table class="w3-table w3-section">
           <tbody>
             <tr *ngFor="let msg of msgs">
-              <td class="w3-padding-16 w3-card w3-round" [ngClass]="{'w3-left w3-grey' : msg.composer, 'w3-right w3-blue' : msg.message && !msg.composer}">{{msg.message}}</td>
+              <td [ngClass]="{
+                'w3-padding-16 w3-card w3-round w3-left w3-grey' : msg.composer,
+                'w3-padding-16 w3-card w3-round w3-right w3-blue' : msg.message && !msg.composer
+              }">{{msg.message}}</td>
             </tr>
           </tbody>
         </table>
       </div>
-    </div>
-
-    <div class="w3-bottom w3-card w3-section w3-margin">
-      <div class="w3-right w3-padding">
-        <input type="text" placeholder="whats on your mind?" [(ngModel)]="clientMsg.message"
-          (keyup.enter)="sendMessage()" name="name">
-        <a class="w3-button w3-blue w3-card-4" (click)="sendMessage()" class="btn btn-default" type="submit"><i
-            class="fa fa-send-o"></i> Send</a>
+      <div class="message w3-bottom w3-grey w3-row">
+        <div class="w3-section w3-right-align w3-padding">
+          <input class="w3-input w3-right-align" type="text" placeholder="whats on your mind?" [(ngModel)]="clientMsg.message"
+            (keyup.enter)="sendMessage()">
+          <button class="w3-button w3-blue w3-card-4 w3-margin-top" (click)="sendMessage()" type="button"><i
+              class="fa fa-send-o"></i> Send</button>
+        </div>
       </div>
     </div>
+
+    <footer class="message w3-card w3-container w3-margin">
+
+    </footer>
 
   </div>
