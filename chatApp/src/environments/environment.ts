@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  socketUrl: "http://localhost:9000/api/v1/socket"
+  socketUrl: "http://localhost:9000/api/v1/socket",
+  topic: "/topic/channel"
 };
 
 /*

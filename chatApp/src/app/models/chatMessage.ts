@@ -1,4 +1,5 @@
 export interface ChatMessage {
   message: string;
-  composer: boolean;
+  email: string;
+  timeStamp: string;
 }

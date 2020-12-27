@@ -5,7 +5,8 @@ export class JsonUtil {
     const obj = JSON.parse(json);
     return {
       message: obj.content,
-      composer: false
+      email: obj.userName,
+      timeStamp: obj.timeStamp
     };
   }
 }

@@ -12,7 +12,7 @@ export class SocketService {
 
   constructor(private memory: SubjectService) { }
 
-  topic: string = "/topic/channel";
+  topic: string = environment.topic;
   stompClient: any;
 
   public connect() {
@@ -44,12 +44,13 @@ export class SocketService {
   }
 
   /**
-   * Send message to sever via web socket
-   * @param message
+   * Send object to sever via web socket
+   * @param object
    */
-  public send(message) {
+  public send(object) {
     console.log("calling logout api via web socket");
-    this.stompClient.send("/app/message", {}, JSON.stringify(message));
+    this.stompClient.send("/app/message", {}, JSON.stringify(object));
   }
 
 }
+
