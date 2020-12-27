@@ -2,17 +2,21 @@ package com.sfofana.socket.controller;
 
 import com.sfofana.socket.model.ReceivedMessage;
 import com.sfofana.socket.transfer.SentMessage;
+import com.sfofana.socket.util.DateUtils;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
+
+import java.util.Date;
 
 @Controller
 public class ChatController {
 
     @MessageMapping("/message")
     @SendTo("/topic/channel")
-    public SentMessage chat(ReceivedMessage receivedMessage) {
-        return new SentMessage(String.format("and returning message %s", receivedMessage.getMessage()));
+    public SentMessage chat(@Payload ReceivedMessage receivedMessage) {
+        System.out.printf(String.format("{ 'message': %s, 'email': %s }", receivedMessage.getMessage(), receivedMessage.getEmail()));
+        return new SentMessage(receivedMessage.getMessage(), receivedMessage.getEmail(), DateUtils.dateToString(new Date()));
     }
 }
