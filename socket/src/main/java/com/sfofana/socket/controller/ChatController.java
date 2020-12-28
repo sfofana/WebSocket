@@ -16,7 +16,6 @@ public class ChatController {
     @MessageMapping("/message")
     @SendTo("/topic/channel")
     public SentMessage chat(@Payload ReceivedMessage receivedMessage) {
-        System.out.printf(String.format("{ 'message': %s, 'email': %s }", receivedMessage.getMessage(), receivedMessage.getEmail()));
-        return new SentMessage(receivedMessage.getMessage(), receivedMessage.getEmail(), DateUtils.dateToString(new Date()));
+        return new SentMessage(receivedMessage.getMessage(), receivedMessage.getEmail(), DateUtils.dateToString(new Date(), DateUtils.TIMEDATE));
     }
 }

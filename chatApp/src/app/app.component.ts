@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ChatMessage } from './models/chatMessage';
-import { ServerMessage } from './models/serverMessage';
 import { SocketService } from './services/socket.service';
 import { SubjectService } from './services/subject.service';
 
@@ -15,11 +14,17 @@ export class AppComponent {
   serverMsg: ChatMessage = {} as ChatMessage;
   msgs: Array<ChatMessage> = [];
   email: string;
+  clientFormat: string = "dialog w3-row-padding w3-card w3-left w3-grey";
+  serverFormat: string = "dialog w3-row-padding w3-card w3-right w3-blue";
 
   constructor(private socket: SocketService, private memory: SubjectService) { }
 
   ngOnInit() {
     this.memory.sync.subscribe(data => {
+      if (data.email === this.email)
+        data.format = this.clientFormat;
+      else
+        data.format = this.serverFormat;
       this.msgs.push(data);
     });
   }

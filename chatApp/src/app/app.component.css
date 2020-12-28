@@ -1,10 +1,10 @@
-.message{
+.message {
   overflow: hidden;
   position: fixed;
   width: 97%;
   max-width: 97%;
 }
-.content{
+.content {
   overflow: auto;
   height: 89%;
   max-height: 89%;
@@ -15,6 +15,11 @@
   width: 100%;
 }
 
-.timestamp{
+.timestamp {
   font-size: small;
+}
+
+.dialog {
+  max-width: 70%;
+  border-radius: 3%;
 }

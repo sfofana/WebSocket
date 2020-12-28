@@ -5,8 +5,8 @@
       <form class="form-inline">
         <div class="form-group">
           <label for="connect">WebSocket connection:</label>
-          <button (click)="connect()" class="btn btn-default" type="submit">Connect</button>
-          <button (click)="disconnect()" class="btn btn-default" type="submit" disabled="disabled">Disconnect</button>
+          <button (click)="connect()" class="btn btn-default" type="button">Connect</button>
+          <button (click)="disconnect()" class="btn btn-default" type="button">Disconnect</button>
           <input [(ngModel)]="email" class="w3-radio" type="radio" name="user" value="master@gmail.com">
           <label>User 1</label>
           <input [(ngModel)]="email" class="w3-radio" type="radio" name="user" value="admin@gmail.com">
@@ -17,22 +17,17 @@
 
     <div class="w3-container">
       <div class="content w3-row">
-        <table class="w3-table w3-section">
-          <tbody>
-            <tr *ngFor="let msg of msgs">
-              <td [ngClass]="{
-                'w3-padding-16 w3-card w3-round w3-left w3-grey' : msg.email === email,
-                'w3-padding-16 w3-card w3-round w3-right w3-blue' : msg.message && !(msg.email === email)
-              }"><label class="timestamp w3-left-align">{{msg.timeStamp}}</label><br>{{msg.message}}</td>
-            </tr>
-          </tbody>
-        </table>
+          <ul *ngIf="msgs.length > 0">
+            <li *ngFor="let msg of msgs" class="w3-container w3-ul">
+              <p class="{{msg.format}}"><label class="timestamp w3-left-align">{{msg.timeStamp}}</label><br>{{msg.message}}</p>
+            </li>
+          </ul>
       </div>
       <div class="message w3-bottom w3-grey w3-row">
         <div class="w3-section w3-right-align w3-padding">
           <input class="w3-input w3-right-align" type="text" placeholder="Type message here"
             [(ngModel)]="clientMsg.message" (keyup.enter)="sendMessage()">
-          <button class="w3-button w3-blue w3-card-4 w3-margin-top" (click)="sendMessage()" type="button"><i
+          <button class="w3-button w3-blue w3-card-4 w3-margin-top w3-large" (click)="sendMessage()" type="button"><i
               class="fa fa-send-o"></i> Send</button>
         </div>
       </div>

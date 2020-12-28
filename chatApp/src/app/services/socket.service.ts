@@ -3,7 +3,7 @@ import * as SockJS from 'sockjs-client';
 import { environment } from '../../environments/environment';
 import { SubjectService } from './subject.service';
 import { Injectable } from '@angular/core';
-import { JsonUtil } from '../utilities/jsonUtil';
+import { JsonUtils } from '../utilities/jsonUtils';
 
 @Injectable({
   providedIn: 'root'
@@ -22,9 +22,8 @@ export class SocketService {
     const _this = this;
     _this.stompClient.connect({}, function (frame) {
       _this.stompClient.subscribe(_this.topic, function (sdkEvent) {
-        _this.memory.setChannel(JsonUtil.jsonToServerMessage(sdkEvent.body));
+        _this.memory.setChannel(JsonUtils.jsonToServerMessage(sdkEvent.body));
       });
-      //_this.stompClient.reconnect_delay = 2000;
     }, this.errorCallBack);
   };
 
